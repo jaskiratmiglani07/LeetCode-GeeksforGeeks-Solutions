@@ -32,15 +32,14 @@ public:
         }
 
         // apply binary search:
-        int low = mini, high = maxi;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (possible(bloomDay, mid, m, k)) {
-                high = mid;
-            } else {
-                low = mid + 1;
-            }
+           int low = mini, high = maxi;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (possible(bloomDay, mid, m, k)) {
+            high = mid - 1;
         }
-        return low;
+        else low = mid + 1;
+    }
+    return low;
     }
 }; 
