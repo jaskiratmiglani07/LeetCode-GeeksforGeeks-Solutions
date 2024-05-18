@@ -10,22 +10,32 @@
  */
 class Solution {
 public:
+   
     ListNode* middleNode(ListNode* head) {
-        int count=0;
-        //counting the total number of nodes
-        ListNode *temp=head;
-        while(temp)
+ //way 1
+    //     int count=0;
+    //     //counting the total number of nodes
+    //     ListNode *temp=head;
+    //     while(temp)
+    //     {
+    //         count++;
+    //         temp=temp->next;
+    //     }
+    //     count/=2; //these are the number of steps to be taken from start
+    //     temp=head;
+    //     while(count--)
+    //     {
+    //         temp=temp->next;
+    //     }
+    //     return temp;
+    //way 2 using slow & fast pointers
+        ListNode *slow=head, *fast=head;
+        while(fast&&fast->next)
         {
-            count++;
-            temp=temp->next;
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        count/=2; //these are the number of steps to be taken from start
-        temp=head;
-        while(count--)
-        {
-            temp=temp->next;
-        }
-        return temp;
+    return slow;
         
     }
 };
