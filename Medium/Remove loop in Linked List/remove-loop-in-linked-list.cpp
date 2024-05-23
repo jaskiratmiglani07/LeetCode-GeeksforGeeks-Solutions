@@ -96,28 +96,66 @@ class Solution
 //bring back the slow pointer to head
 //they will meet at the beginning of the loop if both of them move one node at a time now.
 //now move ahead slow until the next of slow equals fast, and when it does, break the link.
-Node *slow = head;
-Node *fast = head;
-while(fast != nullptr && fast->next != nullptr)
-{
-    slow = slow->next;
-    fast = fast->next->next;
-    if(slow == fast)
-    break;
-}
-if(fast == nullptr|| fast->next == nullptr)
-return;
-slow = head;
-while(slow != fast)
-{ 
-    slow = slow->next;
-    fast = fast->next;
-}
-while(slow->next != fast)
-{
-    slow = slow->next;
-}
-slow->next = nullptr;
+// Node *slow = head;
+// Node *fast = head;
+// while(fast != nullptr && fast->next != nullptr)
+// {
+//     slow = slow->next;
+//     fast = fast->next->next;
+//     if(slow == fast)
+//     break;
+// }
+// if(fast == nullptr|| fast->next == nullptr)
+// return;
+// slow = head;
+// while(slow != fast)
+// { 
+//     slow = slow->next;
+//     fast = fast->next;
+// }
+// while(slow->next != fast)
+// {
+//     slow = slow->next;
+// }
+// slow->next = nullptr;
+//method 2
+    Node *slow=head, *fast=head;
+    //checking if the loop exists or not
+    while( fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        
+        if(slow == fast)
+        break;
+    }
+    if(!fast||!fast->next)
+    return;
+    //find the length of loop
+    slow = fast->next;
+    int count = 1;
+    while(slow!=fast)
+    {
+        count++;
+        slow = slow->next;
+    }
+    
+    slow = head, fast = head;
+    while(count--)
+    {
+        fast = fast->next;
+    }
+    while( slow != fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    //bring slow to the last node
+    while( slow->next !=fast)
+    {
+        slow=slow->next;
+    }
+    slow->next= nullptr;
         // just remove the loop without losing any nodes
     }
 };
