@@ -1,28 +1,25 @@
 class Solution {
 public:
-    bool check(string str)
-    {
-    stack<char>st;
+bool check(string str)
+{
+    stack<char>s;
     for(int i=0; i<str.size(); i++)
     {
-        if(str[i] == '(' || str[i] == '{' || str[i] == '[')
-        st.push(str[i]);
+        if((str[i]=='(')||(str[i]=='{')||(str[i]=='['))
+        s.push(str[i]);
         else
         {
-            if(st.empty())
+            if(s.empty())
             return 0;
-            char top = st.top();
-            if((str[i] == ')' && top != '(') ||
-                 (str[i] == '}' && top != '{') ||
-                   (str[i] == ']' && top != '[')) {
-                    return false;
-            }
+            char top = s.top();
+            if((str[i]==')'&& top!='(')||(str[i]=='}'&& top!='{')||(str[i]==']'&& top!='['))
+            return false;
             else
-            st.pop();
+            s.pop();
         }
     }
-    return st.empty();
-    }
+    return s.empty();
+}
     bool isValid(string s) {
         int val=check(s);
         return val;
