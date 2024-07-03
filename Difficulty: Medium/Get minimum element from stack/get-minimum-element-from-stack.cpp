@@ -18,42 +18,68 @@ public :
 
 class Solution{
     int minEle;
-    stack<int> st1;
-    stack<int> st2;
+    stack<int> st;
     public:
+    //method 1
+// void push(int x)
+// {
+//     if(st1.empty())
+//     {
+//         st1.push(x);
+//         st2.push(x);
+//     }
+//     else
+//     {
+//         st1.push(x);
+//         st2.push(min(x,st2.top()));
+//     }
+// }
+// int pop()
+// {
+//     if(st1.empty())
+//     return -1;
+//     else
+//     {
+//         int element = st1.top();
+//         st1.pop();
+//         st2.pop();
+//         return element;
+//     }
+// }
+// int getMin()
+// {
+//     if(st1.empty())
+//     return -1;
+//     else
+//     {
+//         return st2.top();
+//     }
+// }
+//method 2 w/o the use of another stack
 void push(int x)
 {
-    if(st1.empty())
-    {
-        st1.push(x);
-        st2.push(x);
-    }
+    if(st.empty())
+    st.push(x*101+x);
     else
-    {
-        st1.push(x);
-        st2.push(min(x,st2.top()));
-    }
+    st.push(x*101+min(x,st.top()%101));
 }
 int pop()
 {
-    if(st1.empty())
+    if(st.empty())
     return -1;
     else
     {
-        int element = st1.top();
-        st1.pop();
-        st2.pop();
+        int element = st.top()/101;
+        st.pop();
         return element;
     }
 }
 int getMin()
 {
-    if(st1.empty())
+    if((st.empty()))
     return -1;
     else
-    {
-        return st2.top();
-    }
+    return st.top()%101;
 }
 };
 
