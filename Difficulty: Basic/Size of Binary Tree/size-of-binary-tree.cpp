@@ -124,9 +124,15 @@ class Solution {
   }
     int getSize(Node* node) {
         // code here
+        //method 1
+        // int count;
+        // total(node, count);
+        // return count;
+        //method 2
         int count;
-        total(node, count);
-        return count;
+        if(!node)
+        return 0;
+        return(1+getSize(node->left)+getSize(node->right));
     }
 };
 
