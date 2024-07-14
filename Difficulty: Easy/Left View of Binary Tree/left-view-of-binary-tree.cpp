@@ -152,4 +152,47 @@ vector<int> leftView(Node *root)
        }
    }
    return ans;
+//    1
+//   / \
+//  2   3
+// / \
+// 4   5
+// Initial State
+// Queue: [1]
+// ans: []
+// Iterations
+// 1. Outer while loop (first iteration):
+
+// n = q.size(): 1
+// ans.push_back(q.front()->data): ans = [1]
+// Inner while loop:
+
+// Process node 1: Queue: []
+// Enqueue left child (2), right child (3): Queue: [2, 3]
+// 2. Outer while loop (second iteration):
+
+// n = q.size(): 2
+// ans.push_back(q.front()->data): ans = [1, 2]
+// Inner while loop:
+
+// Process node 2: Queue: [3]
+
+// Enqueue left child (4), right child (5): Queue: [3, 4, 5]
+
+// Process node 3: Queue: [4, 5]
+
+// 3. Outer while loop (third iteration):
+
+// n = q.size(): 2
+// ans.push_back(q.front()->data): ans = [1, 2, 4]
+// Inner while loop:
+
+// Process node 4: Queue: [5]
+
+// Process node 5: Queue: []
+
+// Final State
+// Queue: []
+// ans: [1, 2, 4]
+
 }
