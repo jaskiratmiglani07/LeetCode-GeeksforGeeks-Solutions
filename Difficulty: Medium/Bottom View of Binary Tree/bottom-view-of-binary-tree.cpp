@@ -118,13 +118,68 @@ void Bview(Node *root, int pos, vector<int>& ans, vector<int>& level, int l) {
 class Solution {
   public:
     vector<int> bottomView(Node *root) {
-    int l = 0, r = 0; 
-    find(root,0,l,r);
-    vector<int>ans(r-l+1);
-    vector<int>level(r-l+1,INT_MIN);
-    Bview(root,-1*l,ans,level,0);
-    return ans;
+    // int l = 0, r = 0; 
+    // find(root,0,l,r);
+    // vector<int>ans(r-l+1);
+    // vector<int>level(r-l+1,INT_MIN);
+    // Bview(root,-1*l,ans,level,0);
+    // return ans;
+        // Variables to store the leftmost and rightmost positions
+    int l = 0, r = 0;
     
+    // Determine the range of horizontal positions using the find function
+    find(root, 0, l, r);
+
+    // Vector to store the top view values
+    vector<int> ans(r - l + 1);
+
+    // Vector to track whether a position has been filled in the top view vector
+    vector<int> filled(r - l + 1, 0);
+
+    // Queue for level order traversal: stores nodes
+    queue<Node *> q;
+    // Queue for level order traversal: stores horizontal positions corresponding to nodes
+    queue<int> index;
+
+    // Initialize the queues with the root node and its adjusted horizontal position
+    q.push(root);
+    index.push(-l);  // Adjust root's position to start at zero in the vector
+
+    // Perform level order traversal to fill the top view vector
+    while (!q.empty())
+    {
+        // Dequeue the front node and its corresponding position
+        Node *temp = q.front();
+        q.pop();
+        int pos = index.front();
+        index.pop();
+
+        // If this position hasn't been filled yet, fill it with the node's data
+        if (!filled[pos])
+        {
+            filled[pos]++;        // Mark position as filled  // Store node's data in the top view vector
+        }
+
+        // Enqueue the left child with its adjusted position (pos - 1)
+        if (temp->left)
+        {
+            q.push(temp->left);
+            index.push(pos - 1);
+        }
+
+        // Enqueue the right child with its adjusted position (pos + 1)
+        if (temp->right)
+        {
+            q.push(temp->right);
+            index.push(pos + 1);
+        }
+        if(filled[pos])
+        {
+            ans[pos]=temp->data;
+        }
+        
+    }
+    return ans;
     }
 };
 
